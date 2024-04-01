@@ -19,10 +19,9 @@ function VoiceSynthesizer({
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
   const [volume, setVolume] = useState(1);
-
   useEffect(() => {
     setSynth(window.speechSynthesis);
-  }, [window]);
+  }, []);
 
   useEffect(() => {
     if (!state.response || !synth) return;
@@ -39,12 +38,12 @@ function VoiceSynthesizer({
     return () => {
       synth.cancel();
     };
-  }, [state]);
+  }, [state, voice, pitch, rate, synth, volume]);
 
   useEffect(() => {
     const voices = window.speechSynthesis.getVoices();
     setVoice(voices[0]);
-  }, [window]);
+  }, [voice, pitch, rate, volume]);
 
   const handleVoiceChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const voices = window.speechSynthesis.getVoices();
